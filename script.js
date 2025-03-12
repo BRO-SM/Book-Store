@@ -65,7 +65,8 @@ async function handleLogin() {
         document.querySelectorAll('.delete-book-btn').forEach(btn => btn.classList.remove('d-none'));
         bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
     } else {
-        alert('❌ البريد الإلكتروني أو كلمة المرور غير صحيحة!');
+        alert('❌ البريد الإلكتروني أو كلمة المرور غير صحيحة!  ');
+        alert(' ادخل email = abbbisamir@gmail.com ,Password(123)');
     }
 }
 
