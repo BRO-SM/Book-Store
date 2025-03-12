@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Collection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body id="head">
+    <header id="head" >
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <div class="d-flex align-items-baseline m-2">
+                <button class="btn" id="themeToggle">🌙</button>
+
+                <script>
+                    const themeToggle = document.getElementById('themeToggle');
+                    const body = document.body;
+            
+                    themeToggle.addEventListener('click', () => {
+                        body.classList.toggle('dark-mode');
+                        if (body.classList.contains('dark-mode')) {
+                            themeToggle.textContent = '🌞 ';
+                        } else {
+                            themeToggle.textContent = '🌙';
+                        }
+                    });
+                </script>
+            <a class="navbar-brand  animate__swing animate__delay-2s" href="test-final.html" id="logo">
+                Book 
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary me-2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                Store
+            </a>
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#head">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#Feature">Feature</a>
+                        </li>
+                        <li>
+                        <button id="loginBtn" class="btn btn-outline-light border-black-2 " data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Sign In
+                        </button>
+                        <button id="logoutBtn" class="btn btn-outline-danger  border-black-2 d-none" onclick="handleLogout()">
+                            Sign Out
+                        </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex align-items-center">
+                <a class="nav-link" href="#" onclick="showCartModal()"><i class="bi bi-cart4"></i> <span id="cartCount">0</span></a>
+            </div>
+        </div>
+    <div>
+        <input type="text" id="searchInput" class="form-control mb-3" placeholder="ابحث عن كتاب..." onkeyup="searchBooks()">
+    </div>
+</nav>
+</header>
+
+    <div class="container py-4" >
+        <div id="loginSuccess" class="alert alert-success text-center d-none">
+            <p>🎉 مرحبًا! تم تسجيل الدخول بنجاح.</p>
+        </div>
+
+        <button id="addBookBtn" class="btn btn-primary mb-4 d-none" data-bs-toggle="modal" data-bs-target="#addBookModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add a Book
+        </button>
+
+        <div id="loadingSpinner" class="d-none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div id="bookSections"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="handleLogin()">Sign In</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div class="modal fade" id="addBookModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add a New Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addBookForm">
+                        <input type="text" id="bookTitle" class="form-control mb-3" placeholder="Book Title" required>
+                        <input type="text" id="bookAuthor" class="form-control mb-3" placeholder="Author Name" required>
+                        <textarea id="bookShortSummary" class="form-control mb-3" placeholder="Short Summary" required></textarea>
+                        <textarea id="bookLongSummary" class="form-control mb-3" placeholder="Long Summary" required></textarea>
+                        <input type="number" id="bookPrice" class="form-control mb-3" placeholder="Price" required>
+                        <select id="bookCategory" class="form-select mb-3" required>
+                            <option value="English literature">English literature</option>
+                            <option value="Littérature française">Littérature française</option>
+                            <option value="الادب العربي">الادب العربي</option>
+                            <option value="for kids">for kids</option>
+                        </select>
+                        <input type="file" id="bookImage" class="form-control mb-3" accept="image/*" required>
+                        <img id="imagePreview" class="img-fluid mb-3 d-none">
+                        <button type="button" class="btn btn-primary w-100" onclick="handleAddBook()">Add Book</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Details Modal -->
+    <div class="modal fade" id="bookDetailsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookDetailsTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-bark">
+                    <img id="bookDetailsImage" class="img-fluid mb-3 ">
+                    <p><strong>Author: </strong><span id="bookDetailsAuthor"></span></p>
+                    <p><strong>Price: $</strong><span id="bookDetailsPrice"></span></p>
+                    <p><strong>Category: </strong><span id="bookDetailsCategory"></span></p>
+                    <p id="bookDetailsLongSummary"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Purchase Modal -->
+<div class="modal fade" id="confirmPurchaseModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Purchase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Items in Cart:</h6>
+                <ul id="cartItemsList">
+                    <!-- Cart items will be dynamically added here -->
+                </ul>
+                <p><strong>Total: $<span id="cartTotal">0.00</span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="confirmPurchase()">Confirm Purchase</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+       <!-- Contact Section -->
+       <div id="contact" class="contact-section text-center">
+        <h2>Contact Us</h2>
+        <p>If you have any questions, feel free to reach out!</p>
+        <form id="contactForm">
+            <input type="text" class="form-control mb-2" placeholder="Your Name" required>
+            <input type="email" class="form-control mb-2" placeholder="Your Email" required>
+            <textarea class="form-control mb-2" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+
+    <footer id="Feature">
+        <h3>SUBSCRIBE</h3>
+            <P>Sign up with your email address to receive news and updates.</P>
+            <form action="subscribe.php" method="post">
+                <input type ="first Name" name="first Name" placeholder="First Name">
+                <input type ="last Name" name="last Name" placeholder="Last Name">
+                <input type ="email" name="email" placeholder="Email Address">
+                <button type="submit">SING UP</button>
+            </form>
+        <P>We respect your privacy.</P>
+        <h6>managed gy </h6>
+        <a href="https://www.facebook.com/people/Samir-Ait-Abbi/pfbid0FTVXpe7qfUN7KxWvYKPGF4L3qXwuTxGE2LqPzXqYziq4myoJL4AwLpQQBYkcTxmnl/"><i class="bi bi-facebook"></i> facebook</a>
+        <a href="https://www.facebook.com/people/Samir-Ait-Abbi/pfbid0FTVXpe7qfUN7KxWvYKPGF4L3qXwuTxGE2LqPzXqYziq4myoJL4AwLpQQBYkcTxmnl/"><i class="bi bi-instagram"></i> instagram</a>
+        <a href="https://github.com/BRO-SM"><i class="bi bi-github"></i> github</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+</body>
+</html>

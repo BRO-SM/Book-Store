@@ -1,0 +1,192 @@
+/* تحسين التصميم العام */
+body {
+    padding: 20px;
+    transition: background-color .3s, color 0.3s;
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #000000b4;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px -1px var(--shadow);
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 20px;
+
+    
+}
+nav {
+    padding: 20px;
+    transition: background-color 1.3s, color 0.3s;
+    background-color: #636363;
+}
+nav li a {
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#logo {
+    display: inline-block;
+    margin: 0 .5rem;
+  
+    animation: swing; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 3s; /* don't forget to set a duration! */
+    animation-timing-function: ease-in-out;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-play-state: running;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #0c0c0c;
+}
+.dark-mode header {
+    background-color: #636262;
+    color: #8f4b4b;
+}
+
+.dark-mode nav {
+    background-color: #b9b9b9;
+    color: #8f4b4b;
+}
+
+.card-body {
+    padding: 20px;
+    transition: background-color 1.3s, color 0.3s;
+    background-color: #ffffff;
+    color: #918e8e;
+}
+
+/* تحسين تصميم الأزرار */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* تحسين تصميم البطاقات */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* تحسين تصميم الفوتر */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #383737b4;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px -1px var(--shadow);
+    color: #ffffff;
+}
+
+.dark-mode footer {
+    background-color: #b9b7b7;
+    color: #fff;
+}
+
+footer h3 {
+    font-size: 1.5rem;
+    margin: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #bd1717;
+    text-decoration: underline;
+}
+
+footer p {
+    font-size: 1rem;
+    margin: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #0a0a0a;
+}
+
+footer button {
+    padding: 10px;
+    margin: 10px;
+    background-color: #00000088;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px -1px;
+    animation: alternate-reverse;
+}
+
+footer button:hover {
+    background-color: #bd1717;
+    color: #000000;
+    box-shadow: 0 3px 6px 3px #fff700;
+    transition: background-color 0.7s ease;
+}
+
+footer button:active {
+    background-color: #e5b9b9;
+    color: #2013a6;
+    box-shadow: 0 3px 6px 3px #31be1b;
+    transition: background-color 0.7s ease;
+}
+
+footer img {
+    width: 20px;
+    height: 20px;
+    border-radius: 30%;
+    border: 1px solid #000000;
+}
+
+footer a {
+    color: #09020f;
+    text-decoration: none;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #f5dd0c;
+}
+
+/* تحسين تصميم المودال */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+/* تحسين تصميم السلة */
+#cartCount {
+    background-color: #ffc107;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+}
